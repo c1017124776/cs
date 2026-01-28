@@ -71,7 +71,7 @@ const data = [
       order: 3,
       label: "第三季",
       episodes: 22,
-      tg: null
+      tg: "null"
     },
     {
       order: 4,
@@ -107,16 +107,34 @@ const filteredResults = data.filter(item =>
 
   // 展示匹配结果
   filteredResults.forEach(item => {
-    const resultDiv = document.createElement("div");
-    resultDiv.classList.add("result-item");
+  const resultDiv = document.createElement("div");
+  resultDiv.classList.add("result-item");
+
+  if (item.type === "seasonal") {
+    // 如果是“季节性”类型的条目，渲染每一季
+    let seasonsHtml = item.seasons.map(season => {
+      let tgLink = season.tg ? `<a href="${season.tg}" target="_blank">${season.label}（${season.episodes} 集）</a>` : `<span>${season.label}（${season.episodes} 集） - 暂无链接</span>`;
+      return tgLink;
+    }).join("<br>");
+
     resultDiv.innerHTML = `
       <h3>${item.title}</h3>
       <p>${item.desc}</p>
-      <a href="${item.tg}" target="_blank">点击进入 Telegram</a>
+      ${seasonsHtml}
     `;
-    resultsContainer.appendChild(resultDiv);
-  });
+  } else {
+    // 如果是普通类型的条目
+    let tgLink = item.tg ? `<a href="${item.tg}" target="_blank">点击进入 Telegram</a>` : "<span>暂无链接</span>";
+    resultDiv.innerHTML = `
+      <h3>${item.title}</h3>
+      <p>${item.desc}</p>
+      ${tgLink}
+    `;
+  }
+
+  resultsContainer.appendChild(resultDiv);
 });
+
 // ====== 从 URL 中读取搜索词 ======
 const params = new URLSearchParams(window.location.search);
 const wordFromUrl = params.get("word");
@@ -129,6 +147,7 @@ if (wordFromUrl) {
   const event = new Event("input");
   searchInput.dispatchEvent(event);
 }
+
 
 
 
