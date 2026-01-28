@@ -2,8 +2,8 @@
 const data = [
   {
     keywords: ["魔术师", "魔术师库诺"],
-    title: "魔术师库诺看得见一切｜全集",
-    desc: "高清完整版，点击进入 Telegram 观看",
+    title: "魔术师库诺看得见一切｜赤血更新",
+    desc: "持续更新，点击进入 Telegram 观看",
     tg: "https://t.me/budingdm/978"
   },
   {
@@ -13,12 +13,51 @@ const data = [
     tg: "https://t.me/budingdm"
   },
   {
-    keywords: ["编程", "技术", "学习"],
-    title: "编程学习资料",
-    desc: "提升你的编程技能，加入我们的学习频道",
-    tg: "https://t.me/your_channel_link_3"
-  }
+    keywords: ["完美", "世界","完美世界"],
+    title: "完美世界",
+    desc: "持续更新，点击进入 Telegram 观看",
+    tg: "https://t.me/wmsj6"
+  },
+  {
+    keywords: ["斗破", "苍穹", "斗破苍穹"],
+    title: "斗破苍穹",
+    desc: "持续更新，点击进入 Telegram 观看",
+    tg: "https://t.me/bddpcq"
+  },
+  {
+    keywords: ["遮天", "遮", "天"],
+    title: "遮天",
+    desc: "持续更新，点击进入 Telegram 观看",
+    tg: "https://t.me/tgzhetian"
+  },
+  {
+    keywords: ["吞噬", "星空", "吞噬星空"],
+    title: "吞噬星空",
+    desc: "持续更新，点击进入 Telegram 观看",
+    tg: "https://t.me/tsxk4"
+   },
+   {
+    keywords: ["仙逆", "仙", "逆"],
+    title: "仙逆",
+    desc: "持续更新，点击进入 Telegram 观看",
+    tg: "https://t.me/xianniw"
+  },
+   {
+    keywords: ["凡人", "修仙", "凡人修仙传"],
+    title: "凡人修仙传",
+    desc: "持续更新，点击进入 Telegram 观看",
+    tg: "https://t.me/frxxzzxk"
+  }                           
 ];
+
+
+//新加目录 
+{
+    keywords: ["电影", "科幻", "动作"],
+    title: "科幻动作电影推荐",
+    desc: "喜欢科幻的朋友不容错过，点击进入 Telegram 获取更多信息",
+    tg: "https://t.me/your_channel_link_4"
+  },
 
 // 监听输入框变化，实时搜索
 document.getElementById("search").addEventListener("input", e => {
@@ -57,3 +96,4 @@ if (wordFromUrl) {
   const event = new Event("input");
   searchInput.dispatchEvent(event);
 }
+
