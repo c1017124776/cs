@@ -98,12 +98,17 @@ document.getElementById("search").addEventListener("input", e => {
   if (!query) return; // 如果没有输入内容，什么也不显示
 
   // 搜索匹配
-const filteredResults = data.filter(item =>
-  Array.isArray(item.keywords) &&
-  item.keywords.some(keyword =>
-    query.includes(keyword.toLowerCase())
-  )
-);
+const query = searchInput.value.trim().toLowerCase();
+
+const filteredResults = data.filter(item => {
+  if (!query) return true; // 没输入时显示全部
+  if (!item.keywords) return false;
+
+  return item.keywords
+    .toString()
+    .toLowerCase()
+    .includes(query);
+});
 
   // 展示匹配结果
   filteredResults.forEach(item => {
@@ -147,6 +152,7 @@ if (wordFromUrl) {
   const event = new Event("input");
   searchInput.dispatchEvent(event);
 }
+
 
 
 
