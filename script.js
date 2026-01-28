@@ -50,15 +50,6 @@ const data = [
   }                           
 ];
 
-
-//新加目录 
-{
-    keywords: ["电影", "科幻", "动作"],
-    title: "科幻动作电影推荐",
-    desc: "喜欢科幻的朋友不容错过，点击进入 Telegram 获取更多信息",
-    tg: "https://t.me/your_channel_link_4"
-  },
-
 // 监听输入框变化，实时搜索
 document.getElementById("search").addEventListener("input", e => {
   const query = e.target.value.trim().toLowerCase();
@@ -96,4 +87,5 @@ if (wordFromUrl) {
   const event = new Event("input");
   searchInput.dispatchEvent(event);
 }
+
 
