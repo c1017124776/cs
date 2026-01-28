@@ -141,17 +141,24 @@ const filteredResults = data.filter(item => {
 });
 
 // ====== 从 URL 中读取搜索词 ======
-const params = new URLSearchParams(window.location.search);
-const wordFromUrl = params.get("word");
+const query = searchInput.value.trim().toLowerCase();
 
-if (wordFromUrl) {
-  const searchInput = document.getElementById("search");
-  searchInput.value = wordFromUrl;
+const filteredResults = data.filter(item => {
+  // 1️⃣ 没输入时，全部显示（否则一打字就全没）
+  if (!query) return true;
 
-  // 手动触发一次搜索
-  const event = new Event("input");
-  searchInput.dispatchEvent(event);
+  // 2️⃣ 兜底：keywords 不存在就当空字符串
+  const keywords = (item.keywords || '').toString().toLowerCase();
+
+  // 3️⃣ 真正的匹配
+  return keywords.includes(query);
+});
+
+// ⚠️ 非常重要：确认你后面是用 filteredResults 渲染
+render(filteredResults);
+;
 }
+
 
 
 
