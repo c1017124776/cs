@@ -71,7 +71,7 @@ const data = [
       order: 3,
       label: "第三季",
       episodes: 22,
-      tg: "null"
+      tg: null
     },
     {
       order: 4,
@@ -101,7 +101,7 @@ document.getElementById("search").addEventListener("input", e => {
 const filteredResults = data.filter(item =>
   Array.isArray(item.keywords) &&
   item.keywords.some(keyword =>
-    keyword.toLowerCase().includes(query)
+    query.includes(keyword.toLowerCase())
   )
 );
 
@@ -147,6 +147,7 @@ if (wordFromUrl) {
   const event = new Event("input");
   searchInput.dispatchEvent(event);
 }
+
 
 
 
