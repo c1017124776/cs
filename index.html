@@ -1,19 +1,25 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视频搜索平台</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>动漫搜索</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-    <div class="container">
-        <h1>视频搜索平台</h1>
-        <input type="text" id="search" placeholder="请输入关键词搜索..." />
-        <div id="results"></div>
+  <header class="header">
+    <h1 class="logo">📺 动漫百科搜索</h1>
+    <div class="search-box">
+      <input id="search" type="text" class="search-input" placeholder="输入动漫名、角色、类型…" />
     </div>
+  </header>
 
-    <script src="script.js"></script>
+  <main class="results-container" id="results"></main>
+
+  <footer class="footer">
+    <p>Powered by AI Anime Search · 搜索支持最全番剧检索</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
