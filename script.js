@@ -71,7 +71,7 @@ const data = [
       order: 3,
       label: "第三季",
       episodes: 22,
-      tg: "..."
+      tg: null
     },
     {
       order: 4,
@@ -98,9 +98,12 @@ document.getElementById("search").addEventListener("input", e => {
   if (!query) return; // 如果没有输入内容，什么也不显示
 
   // 搜索匹配
-  const filteredResults = data.filter(item =>
-    item.keywords.some(keyword => keyword.toLowerCase().includes(query))
-  );
+const filteredResults = data.filter(item =>
+  Array.isArray(item.keywords) &&
+  item.keywords.some(keyword =>
+    keyword.toLowerCase().includes(query)
+  )
+);
 
   // 展示匹配结果
   filteredResults.forEach(item => {
@@ -126,6 +129,7 @@ if (wordFromUrl) {
   const event = new Event("input");
   searchInput.dispatchEvent(event);
 }
+
 
 
 
