@@ -73,105 +73,118 @@ const data = [
 // ======================
 // 数据预处理：为每个项目创建可搜索的文本
 // ======================
+// 数据预处理：为每个项目创建可搜索的文本 (保持不变)
+// ======================
 const processedData = data.map(item => {
-    // 收集所有可能需要搜索的文本信息
     const textParts = [
         item.title,
         item.type,
         item.region,
-        item.year.toString(), // 年份也转换为字符串以便搜索
-        ...(item.genres || []) // 确保genres是数组，如果不存在则使用空数组
+        item.year.toString(),
+        ...(item.genres || [])
     ];
-    // 过滤掉空值，用空格连接，并转换为小写，方便后续进行无大小写匹配
     const searchableText = textParts.filter(Boolean).join(" ").toLowerCase();
     return {
-        ...item, // 复制原始项目的所有属性
-        searchableText: searchableText // 添加一个新属性，用于搜索
+        ...item,
+        searchableText: searchableText
     };
 });
 
+// ************************************
+// 在这里包裹你的所有 DOM 相关的 JavaScript 代码
+// 确保 DOM 完全加载后再执行getElementById
+// ************************************
+document.addEventListener('DOMContentLoaded', function() {
+    // === 这里是修改的地方：更新 ID ===
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button"); // 新增：获取搜索按钮
+    const resultsContainer = document.getElementById("results-container");
 
-// ======================
-// 搜索逻辑
-// ======================
-const searchInput = document.getElementById("search");
-const resultsContainer = document.getElementById("results");
-
-searchInput.addEventListener("input", () => {
-    // 1. 获取并标准化用户查询
-    const rawQuery = searchInput.value.trim().toLowerCase();
-    resultsContainer.innerHTML = ""; // 清空之前的搜索结果
-
-    if (!rawQuery) {
-        // 如果查询为空，不进行搜索，直接返回
+    // 检查元素是否找到，这是一个良好的编程习惯
+    if (!searchInput) {
+        console.error("Error: Element with ID 'search-input' not found.");
+        return;
+    }
+    if (!searchButton) { // 新增：检查搜索按钮
+        console.error("Error: Element with ID 'search-button' not found.");
+        return;
+    }
+    if (!resultsContainer) {
+        console.error("Error: Element with ID 'results-container' not found.");
         return;
     }
 
-    // 2. 将查询拆分为多个词（支持多关键词搜索，例如 "玄幻 穿越"）
-    // 使用 /\s+/ 正则表达式分割，可以处理多个空格以及换行符等空白字符
-    const queryTerms = rawQuery.split(/\s+/).filter(Boolean); // 过滤掉因连续空格产生的空字符串
+    // --- 监听输入框的 'input' 事件 ---
+    searchInput.addEventListener("input", performSearch);
 
-    // 3. 过滤数据
-    const filteredResults = processedData.filter(item => {
-        // 项目的搜索文本 (已经统一成小写)
-        const itemSearchableText = item.searchableText;
+    // --- 监听搜索按钮的 'click' 事件 (可选，如果希望点击按钮也触发搜索) ---
+    searchButton.addEventListener("click", performSearch);
 
-        // 要求项目必须包含用户输入的所有关键词 (AND 逻辑)
-        return queryTerms.every(term => itemSearchableText.includes(term));
-    });
+    // 统一的搜索逻辑函数
+    function performSearch() {
+        const rawQuery = searchInput.value.trim().toLowerCase();
+        resultsContainer.innerHTML = ""; // 清空之前的搜索结果
 
-    // 4. 对结果进行排序 (例如按评分从高到低)
-    filteredResults.sort((a, b) => b.rating - a.rating); // 假设 rating 越高越好
+        // 显示加载指示器（如果你在 HTML 中设置了隐藏，这里需要显示）
+        document.getElementById("loading-indicator").style.display = 'block';
 
-    // 5. 渲染结果
-    renderResults(filteredResults);
+
+        if (!rawQuery) {
+            document.getElementById("loading-indicator").style.display = 'none'; // 没有查询时隐藏加载
+            return;
+        }
+
+        const queryTerms = rawQuery.split(/\s+/).filter(Boolean);
+
+        const filteredResults = processedData.filter(item => {
+            const itemSearchableText = item.searchableText;
+            return queryTerms.every(term => itemSearchableText.includes(term));
+        });
+
+        filteredResults.sort((a, b) => b.rating - a.rating);
+
+        // 模拟网络请求延迟，实际项目中这里会是 fetch() 等异步操作
+        setTimeout(() => {
+            document.getElementById("loading-indicator").style.display = 'none'; // 隐藏加载指示器
+            renderResults(filteredResults);
+        }, 500); // 假设 500ms 延迟
+    }
 });
 
+
 // ======================
-// 渲染结果 (保持不变)
+// 渲染结果 (保持不变，可以在 DOMContentLoaded 外部)
 // ======================
 function renderResults(results) {
+    const resultsContainer = document.getElementById("results-container"); // 再次获取，确保在 DOMContentLoaded 执行后
+    if (!resultsContainer) return; // 安全检查
+
     if (results.length === 0) {
         resultsContainer.innerHTML = "<p>没有找到相关结果。</p>";
         return;
     }
 
+    resultsContainer.innerHTML = ''; // 清空旧结果再添加新结果，防止重复添加
+
     results.forEach(item => {
         const div = document.createElement("div");
         div.className = "result-item";
 
-        // 注意：你的原始数据中没有 seasonal 类型的项目，也没有 desc 和 tg 属性。
-        // 我保留了你的渲染逻辑，但如果 data 中没有这些字段，可能需要调整。
-        // 目前的数据结构，只会进入 else 分支。
+        // 简化 seasonal 类型的处理，或者根据你的实际逻辑来
         if (item.type === "seasonal") {
-            // 这部分逻辑目前不会被触发，因为你的 data 中没有 type: "seasonal" 的项
-            // 并且 seasonal 类型所需的 'seasons' 数组也不存在在你的数据中。
-            // 如果你未来有这样的数据，需要补充 item.desc 和 item.seasons.
-            const seasonsHtml = item.seasons
-                ? item.seasons
-                    .map(season => {
-                        return season.tg
-                            ? `<a href="${season.tg}" target="_blank">${season.label}（${season.episodes} 集）</a>`
-                            : `<span>${season.label}（${season.episodes} 集） - 暂无链接</span>`;
-                    })
-                    .join("<br>")
-                : `<span>暂无季度信息</span>`;
-
             div.innerHTML = `
                 <img src="${item.cover}" alt="${item.title}" class="result-cover">
                 <h3>${item.title}</h3>
-                <p>类型: ${item.type} | 地区: ${item.region} | 年份: ${item.year} | 评分: ${item.rating}</p>
-                <p>流派: ${item.genres.join(", ")}</p>
-                <p>${item.desc || '暂无描述'}</p>
-                <div>${seasonsHtml}</div>
+                <p>类型: ${item.type} | 季度: ${item.season} | 评分: ${item.rating}</p>
+                <p>流派: ${item.genres ? item.genres.join(", ") : 'N/A'}</p>
+                ${item.tg ? `<a href="${item.tg}" target="_blank">点击进入 Telegram</a>` : ''}
             `;
         } else {
-            // 对于当前 provided 'data' 结构，所有项都会进入此分支
             div.innerHTML = `
                 <img src="${item.cover}" alt="${item.title}" class="result-cover">
                 <h3>${item.title}</h3>
                 <p>类型: ${item.type} | 地区: ${item.region} | 年份: ${item.year} | 评分: ${item.rating}</p>
-                <p>流派: ${item.genres.join(", ")}</p>
+                <p>流派: ${item.genres ? item.genres.join(", ") : 'N/A'}</p>
                 ${item.tg ? `<a href="${item.tg}" target="_blank">点击进入 Telegram</a>` : ''}
             `;
         }
