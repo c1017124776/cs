@@ -47,7 +47,45 @@ const data = [
     title: "凡人修仙传",
     desc: "持续更新，点击进入 Telegram 观看",
     tg: "https://t.me/frxxzzxk"
-  }                           
+  },
+  {
+  title: "进击的巨人",
+  keywords: ["进击的巨人", "巨人", "Attack on Titan"],
+  cover: "aot.jpg",
+  seasons: [
+    {
+      season: 1,
+      label: "第一季",
+      episodes: 25,
+      tg: "https://t.me/budingdm/169"
+    },
+    {
+      season: 2,
+      label: "第二季",
+      episodes: 12,
+      tg: "https://t.me/budingdm/150"
+    },
+    {
+      season: 3,
+      label: "[进击的巨人  最终季 完结篇]",
+      episodes: 2,
+      tg: "https://t.me/budingdm/41"
+    },
+     {
+      season: 4,
+      label: "进击的巨人最终季 Part.2",
+      episodes: 12,
+      tg: "https://t.me/budingdm/3"
+    },
+    {
+      season: 5,
+      label: "最终季2020",
+      parts: ["Part 1", "完结篇"],
+      tg: "https://t.me/budingdm/16"
+    }    
+  ]
+}
+
 ];
 
 // 监听输入框变化，实时搜索
@@ -87,5 +125,6 @@ if (wordFromUrl) {
   const event = new Event("input");
   searchInput.dispatchEvent(event);
 }
+
 
 
