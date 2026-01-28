@@ -2,22 +2,29 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>动漫搜索</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="header">
-    <h1 class="logo">📺 动漫百科搜索</h1>
-    <div class="search-box">
-      <input id="search" type="text" class="search-input" placeholder="输入动漫名、角色、类型…" />
+    <div class="header-inner">
+      <h1 class="logo">动漫搜索</h1>
+      <input
+        id="search"
+        class="search-input"
+        type="text"
+        placeholder="搜索动漫 / 番剧 / 角色"
+      />
     </div>
   </header>
 
-  <main class="results-container" id="results"></main>
+  <main class="main">
+    <div id="results" class="results"></div>
+  </main>
 
   <footer class="footer">
-    <p>Powered by AI Anime Search · 搜索支持最全番剧检索</p>
+    © Anime Search · 仅用于学习交流
   </footer>
 
   <script src="script.js"></script>
