@@ -1,76 +1,94 @@
 * {
   box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #020617);
-  color: #e5e7eb;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f7f7f7;
+  color: #222;
 }
 
-.app {
-  max-width: 900px;
+/* 顶部搜索区 */
+.header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.header-inner {
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 20px;
-}
-
-.logo {
-  text-align: center;
-  font-size: 32px;
-  margin-bottom: 30px;
-}
-
-.search-input {
-  width: 100%;
-  padding: 16px 20px;
-  font-size: 18px;
-  border-radius: 12px;
-  border: none;
-  outline: none;
-  background: #020617;
-  color: #e5e7eb;
-  box-shadow: 0 0 0 1px #1e293b;
-}
-
-.search-input::placeholder {
-  color: #64748b;
-}
-
-.results {
-  margin-top: 30px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
   gap: 20px;
 }
 
-.result-item {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 16px;
+.logo {
+  font-size: 22px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.search-input {
+  flex: 1;
+  height: 42px;
+  padding: 0 14px;
+  font-size: 15px;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #409eff;
+  box-shadow: 0 0 0 2px rgba(64, 158, 255, 0.15);
+}
+
+/* 主体 */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* 结果列表 */
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.result-item {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 6px;
+  padding: 14px 16px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .result-item:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: #409eff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .result-item h3 {
-  margin: 0 0 10px;
-  font-size: 20px;
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .result-item p {
-  font-size: 14px;
-  color: #cbd5f5;
+  margin: 0;
+  font-size: 13px;
+  color: #666;
 }
 
-@media (max-width: 600px) {
-  .logo {
-    font-size: 24px;
-  }
+/* 页脚 */
+.footer {
+  text-align: center;
+  padding: 16px 0;
+  font-size: 12px;
+  color: #999;
 }
