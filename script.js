@@ -85,7 +85,7 @@ const data = [
       episodes: 2,
       tg: "https://t.me/budingdm/41"
     }
-  ]
+  ];
 }
 
 
@@ -147,6 +147,7 @@ if (wordFromUrl) {
   const event = new Event("input");
   searchInput.dispatchEvent(event);
 }
+
 
 
 
