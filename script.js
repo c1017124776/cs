@@ -86,8 +86,6 @@ const data = [
       tg: "https://t.me/budingdm/41"
     }
   ];
-}
-
 
 // 监听输入框变化，实时搜索
 document.getElementById("search").addEventListener("input", e => {
@@ -158,6 +156,7 @@ const filteredResults = data.filter(item => {
 render(filteredResults);
 ;
 }
+
 
 
 
