@@ -2,7 +2,7 @@
 // 模拟数据库 (保持不变)
 // ======================
 const data = [
-    { id: "arune-no-jikenbo", title: "阿尔涅的事件簿", type: "TV", region: "JP", year: 2023, genres: ["悬疑", "奇幻", "推理"], rating: 7.8,  tg: "https://t.me/budingdm/978" },
+    { id: "arune-no-jikenbo", title: "阿尔涅的事件簿", type: "TV", region: "JP", year: 2023, genres: ["悬疑", "奇幻", "推理"], rating: 7.8, "cover": "https://via.placeholder.com/100x150?text=阿尔涅的事件簿" },
     { id: "ao-shi-dan-shen-2025", title: "傲世丹神", type: "TV", region: "CN", year: 2025, genres: ["玄幻", "修真", "战斗"], rating: 7.5, cover: "https://via.placeholder.com/100x150?text=傲世丹神" },
     { id: "bei-lin-guo-wang-zi-ni-ai-de-fan-pai-nv-zhu", title: "被邻国王子溺爱的反派女主", type: "TV", region: "JP", year: 2023, genres: ["恋爱", "异世界", "反派女主"], rating: 7.6, cover: "https://via.placeholder.com/100x150?text=被邻国王子溺爱的反派女主" },
     { id: "bai-lian-cheng-shen-s3-2025", title: "百炼成神 第三季", type: "TV", region: "CN", year: 2025, genres: ["玄幻", "修真", "热血"], rating: 8.4, cover: "https://via.placeholder.com/100x150?text=百炼成神+第三季" },
@@ -192,5 +192,6 @@ function renderResults(results) {
         resultsContainer.appendChild(div);
     });
 }
+
 
 
